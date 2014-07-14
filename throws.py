@@ -12,40 +12,21 @@ class Infix:
     def __call__(self, func, *args, **kwargs):
         return throw(func, *args, **kwargs)
 
-# class throws(Infix):
-#     def __init__(self, function):
-#         Infix.__init__(self, function)
-
 def throw(func, *args, **kwargs):
     try:
         return func(*args, **kwargs)
     except Exception as e:
-        class excep(type(e)):
-            def __getattribute__(self, name):
-                if name == '__class__':
-                    return type(e)
-                else:
-                    return super(excep, self).__getattribute__(name)
+        exception_type = type(e)
 
+        class excp(exception_type):
             def __eq__(self, other):
                 return type(self) == other or issubclass(type(self), other)
 
-        exception = excep(e)
+        excp.__name__ = exception_type.__name__
+        exception = excp()
         exception.message = e.message
         exception.args = e.args
         
         return exception
 
 throws=Infix(lambda x,y: throw(x[0], *x[1:]) == y)
-
-
-# if int("hi") throws ValueError:
-#     print ""
-
-
-# try:
-#     x = int('hi')
-# except:
-#     x = "didnt work"
-
-# x = int('hi') if not int("hi") raises Exception else "didn't work"
