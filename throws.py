@@ -1,5 +1,5 @@
 # Nick Sweeting 2014
-
+# hackiest thing ever
 def throws(func, *args, **kwargs):
     try:
         func(*args, **kwargs)
