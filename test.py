@@ -1,50 +1,52 @@
 from throws import raises
 
+
 if (int, "hi") |raises| ValueError:
-    print "infix style threw valueerror"
+    print "casting 'hi' to int threw a valueerror"
 
-elif (int, "hi") > raises > TypeError:
-    print "infix style threw typeerror"
+if (int, "hi") |raises| Exception:
+    print "casting 'hi' to int threw a subclass or instance of Exception"
 
-elif (int, "hi") |raises| Exception:
-    print "infix threw other exception"
+def add(one, two):
+    return one+two
 
-# "infix style threw valueerror"
+if (add, "hi", 2) |raises| TypeError:
+    print " adding 'hi' to 2 threw threw a typeerror"
 
-if raises(int, "hi") > ValueError:
-    print "func style threw valueerror"
-elif raises(int, "hi") > TypeError:
-    print "func style threw typeerror"
-elif raises(int, "hi") > Exception:
-    print "func style threw other exception"
-elif not raises(int, "hi"):
-    print "func style threw no exceptions"
+if (int, 5) |raises| Exception:
+    print "casting '5' to int threw an instance or subclass of Exception"
+else:
+    print "casting '5' to int threw no exceptions"
 
-# "func style threw valueerror"
+if raises(int, "hi") == ValueError:
+    print "casting 'hi' to int threw a valueerror"
 
+def test(text):
+    raise Exception(text)
 
-x = int("abc") if not (int, "abc") |raises| ValueError else -1
-y = int(100) if not (int, 100) |raises| Exception else -1
-z = int(100) if not raises(int, 100) else -1
-print x, y, z
-# -1 100 50
+if raises(test, "hi") == Exception:
+    print "running test threw an instance of Exception"
 
-print raises(int, "abc")
-# invalid literal for int() with base 10: 'hi'
-print raises(int, "abc").__class__
-# <class 'throws.ValueError'>
+if raises(int, "hi") <= Exception:
+    print "casting 'hi' to int threw a subclass or instance of Exception"
 
-print raises(int, 100)
-# None
-print raises(int, 100).__class__
-# <type 'NoneType'>
+if not raises(int, '5') == Exception:
+    print "casting '5' to int threw no exceptions"
+
+if not raises(int, '50'):
+    print "casting '50' to int threw no exceptions"
+
+w = int("abc") if not (int, "abc") |raises| ValueError else -1
+x = int("100") if not (int, "100") |raises| Exception else -1
+y = int("50") if not raises(int, "50") < Exception else -1
+z = int("99") if not raises(int, "99") else -1
+print w, x, y, z
+
+print type(raises(int, "abc")), raises(int, "abc")
+print type(raises(int, "100")), raises(int, "100")
 
 
 raise raises(int, "hi")
-# Traceback (most recent call last):
-#   File "test.py", line 42, in <module>
-#     raise raises(int, "hi")
-# throws.ValueError: invalid literal for int() with base 10: 'hi'
 
 
 # Ideally, it would work like this:

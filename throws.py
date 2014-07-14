@@ -3,19 +3,43 @@
 def throws(func, *args, **kwargs):
     try:
         func(*args, **kwargs)
-        return None
+        class NoError(Exception):
+            def __repr__(self):
+                return "NoError"
+            def __eq__(self, other):
+                if not other:
+                    return True
+                return False
+            def __ne__(self, other):
+                return not self.__eq__(other)
+            def __gt__(self, other):
+                return False
+            def __lt__(self, other):
+                return False
+            def __le__(self, other):
+                return self.__eq__(other)
+            def __ge__(self, other):
+                return self.__eq__(other)
+            def __len__(self):
+                return False
+
+        return NoError("NoError")
+
     except Exception as e:
         exception_type = type(e)
-
         class excp(exception_type):
             def __eq__(self, other):
-                return type(self) == other or issubclass(type(self), other)
+                return exception_type == other
             def __ne__(self, other):
-                return not (type(self) == other or issubclass(type(self), other))
+                return not (exception_type == other)
             def __gt__(self, other):
-                return type(self) == other or issubclass(type(self), other)
+                return issubclass(exception_type, other) and not exception_type == other
             def __lt__(self, other):
-                return type(self) == other or issubclass(type(self), other)
+                return issubclass(exception_type, other) and not exception_type == other
+            def __le__(self, other):
+                return issubclass(exception_type, other) or exception_type == other
+            def __ge__(self, other):
+                return issubclass(exception_type, other) or exception_type == other
 
         excp.__name__ = exception_type.__name__
         exception = excp()
@@ -39,4 +63,4 @@ class Infix:
     def __call__(self, func, *args, **kwargs):
         return throws(func, *args, **kwargs)
 
-raises=Infix(lambda x,y: throws(x[0], *x[1:]) == y)
+raises=Infix(lambda x,y: throws(x[0], *x[1:]) is not None and throws(x[0], *x[1:]) <= y)
