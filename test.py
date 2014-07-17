@@ -1,4 +1,4 @@
-from throws import raises
+from throws import raises, NoError
 
 
 if (int, "hi") |raises| ValueError:
@@ -11,12 +11,15 @@ def add(one, two):
     return one+two
 
 if (add, "hi", 2) |raises| TypeError:
-    print " adding 'hi' to 2 threw threw a typeerror"
+    print " adding 'hi' to 2 threw a typeerror"
 
-if (int, 5) |raises| Exception:
+if (int, '5') |raises| Exception:
     print "casting '5' to int threw an instance or subclass of Exception"
 else:
     print "casting '5' to int threw no exceptions"
+
+if (int, '50') |raises| NoError:
+    print "casting '50' to int threw no exceptions"
 
 if raises(int, "hi") == ValueError:
     print "casting 'hi' to int threw a valueerror"
