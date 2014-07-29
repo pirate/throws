@@ -8,15 +8,11 @@ Quickstart:
 ```bash
 git clone https://github.com/pirate/throws.git
 cd throws
-```
-
-```bash
 python tests.py
 ```
-
 or:
 ```bash
-$python
+python
 >>>from throws import raises, NoError
 >>>a = int("abc") if not (int, "abc") |raises| ValueError else -1
 >>>print(a)
