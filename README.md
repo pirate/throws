@@ -23,7 +23,7 @@ $python
 ```
 -----------
 
-My proposal is to incorporate this as a python keyword, allowing us to do powerful one-lines like this:
+My proposal is to incorporate this as a python keyword, allowing us to do powerful one-liners like this:
 
 ```python
 a = int("10") if not raises ValueError else -1
@@ -43,14 +43,15 @@ except Exception:
 ```
 
 This is ok... but not ideal.
-Maybe it's wistful thinking, maybe it's python blasphemy, but I've always wanted more powerful expressions for doing conditional logic on exceptions.
-What if we could do something like this:
+Maybe it's wistful thinking, maybe it's python blasphemy, but I've always wanted more powerful expressions for doing conditional logic on exceptions.  
+
+This would be so much more concise!
 
 ```python
 a = int("10") if not raises ValueError else -1
 ```
 
-That's much more concise!  It may seem excessive to add a new keyword, but it's extremely valuable when you're dealing with hundreds of lines of nested exception logic for parsing potentially invalid data.
+It may seem excessive to add a new keyword, but it's extremely valuable when you're dealing with hundreds of lines of nested exception logic for parsing potentially invalid data.
 Of course, the more verbose form would still be available too:
 
 Ideally we could run code inside of parens (to do variable assignments) and test for exceptions:
