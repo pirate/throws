@@ -30,11 +30,12 @@ Right now, this is your only option:
 
 ```python
 try:
-    a = int("hi")
+    a = int("10")
 except ValueError:
-    a = 0
+    a = -1
+    pint "got a ValueError"
 except Exception:
-    a = 0
+    a = -1
     print "some other error"
 ```
 
@@ -60,6 +61,14 @@ else:
   print "converting to int failed"
 ```
 
-We cant do this in current python, but we can combine some cool hacks and get something pretty close.
-The hack I use specifically is overloading the bitwise || <<<>> operators to hack together an infix keyword like this: `if a |raises| Exception:`.
+We cant do this (yet) in current python, but we can combine some cool hacks and get something pretty close.
+
+```python
+from throws import raises
+
+if (int, "hi") |raises| ValueError:
+    print "converting 'hi' to int threw a valueerror"
+```
+
+The hack I use specifically is overloading the bitwise || <<<>> operators to hack together an infix keyword like this: `arg_1 |raises| arg_2`.
 Check out `tests.py` for a comprehensive overview of what this mini-library is capable of.
