@@ -2,13 +2,13 @@ throws/raises
 =============
 
 This is a mini python library that allows you to use if/else statements for doing conditional logic with exceptions.
-Check out `tests.py` for a comprehensive overview of how to use the keyword `raises`, provided by importing `throws.py`.
+Check out `test.py` for a comprehensive overview of how to use the keyword `raises`, provided by importing `throws.py`.
 
 Quickstart:
 ```bash
 git clone https://github.com/pirate/throws.git
 cd throws
-python tests.py
+python test.py
 ```
 or:
 ```bash
@@ -70,5 +70,7 @@ if (int, "hi") |raises| ValueError:
     print "converting 'hi' to int threw a valueerror"
 ```
 
-The hack I use specifically is overloading the bitwise || <<<>> operators to hack together an infix keyword like this: `arg_1 |raises| arg_2`.
-Check out `tests.py` for a comprehensive overview of what this mini-library is capable of.
+The hack I use specifically is overloading the bitwise || <<<>> operators to hack together an infix keyword like this:   `(func, *args) |raises| ExceptionType` which evaluates to `True` if that exception type is thrown.  
+or without using the infix operator hack like this  
+`raises(func, *args, **kwargs)` returns a `Truthy` `NoError`, or the `Falsy` `ExceptionType`.
+Check out `test.py` for a comprehensive overview of what this mini-library is capable of.
