@@ -72,9 +72,9 @@ if (int, "hi") |raises| ValueError:
 
 The hack I use specifically is overloading the bitwise || <<<>> operators to hack together an infix keyword like this:  
   
-`(func, *args) |raises| ExceptionType` which evaluates to `True` if that exception type is thrown.  
-or without using the infix operator hack like this  
-  
+`(func, *args) |raises| ExceptionType` which is `Truthy` if that exception type is thrown.  
+
+Or do it without using the infix operator hack like this:  
 `raises(func, *args, **kwargs)` returns a `Truthy` `NoError`, or the `Falsy` `ExceptionType`.
   
 Check out `test.py` for a comprehensive overview of what this mini-library is capable of.
