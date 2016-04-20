@@ -1,8 +1,10 @@
 throws/raises
 =============
 
-This is a mini python library that allows you to use if/else statements for doing conditional logic with exceptions.
+This is a mini python experiment that allows you to use if/else statements for doing conditional logic with exceptions.  
 Check out `test.py` for a comprehensive overview of how to use the keyword `raises`, provided by importing `throws.py`.
+
+This is a joke and a prototype, the real thing would have to have much much nicer syntax.  Please don't actually use it in production code, as it looks hideous.
 
 Quickstart:
 ```bash
@@ -77,4 +79,4 @@ The hack I use specifically is overloading the bitwise || <<<>> operators to hac
 Or do it without using the infix operator hack like this:  
 `raises(func, *args, **kwargs)` returns a `Truthy` `NoError`, or the `Falsy` `ExceptionType`.
   
-Check out `test.py` for a comprehensive overview of what this mini-library is capable of.
+Check out `test.py` for a comprehensive overview of what these few tools are capable of.
