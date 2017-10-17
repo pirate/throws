@@ -80,3 +80,20 @@ Or do it without using the infix operator hack like this:
 `raises(func, *args, **kwargs)` returns a `Truthy` `NoError`, or the `Falsy` `ExceptionType`.
   
 Check out `test.py` for a comprehensive overview of what these few tools are capable of.
+
+## TODO
+
+v2 still stupid but easier to understand:
+```
+>>>val = 'abc'
+>>>int_val = 'int(val)' |catch| ValueError |finally| -1
+```
+
+v3 the only non-ridiculous way to do this in python that I can think of:
+```python
+@raises(ValueError, fallback=-1)
+def parse_val(input: str) -> int:
+    return int(input)
+
+assert parse_val('abc') == -1
+```
