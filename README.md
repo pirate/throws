@@ -1,6 +1,8 @@
 throws/raises
 =============
 
+**EDIT: this became a real thing, but it got rejected, see https://www.python.org/dev/peps/pep-0463/**
+
 This is a mini python experiment that allows you to use if/else statements for doing conditional logic with exceptions.  
 Check out `test.py` for a comprehensive overview of how to use the keyword `raises`, provided by importing `throws.py`.
 
